@@ -2,8 +2,10 @@ package com.example.navigasidata.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,13 +15,17 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -29,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.navigasidata.R
+import com.example.navigasidata.data.RuangKelas
 import com.example.navigasidata.model.Mahasiswa
 import com.example.navigasidata.model.RencanaStudy
 
@@ -98,7 +105,7 @@ fun RencanaStudyView(
             )
             .fillMaxSize(),
 
-    ){
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -107,11 +114,41 @@ fun RencanaStudyView(
             Text(text = "Pliha Mata Kuliah Peminatan", fontWeight = FontWeight.Bold)
             Text(
                 text = "Silahkan pilih mata kuliah yang anda inginkan",
-                fontSize =  12.sp,
+                fontSize = 12.sp,
                 fontWeight = FontWeight.Light
             )
+            Spacer(modifier = Modifier.padding(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                RuangKelas.listKelas.forEach { data ->
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        RadioButton(
+                            selected = pilihanKelas == data,
+                            onClick = { pilihanKelas = data }
+                        )
+                        Text(data)
+                    }
+                }
 
+            }
+            Spacer(modifier = Modifier.padding(8.dp))
+            HorizontalDivider()
+            Spacer(modifier = Modifier.padding(8.dp))
+            Text(text = "Klausul Persetujuan Mahasiswa", fontWeight = FontWeight.Bold)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Checkbox(
+                    checked = checked,
+                    onCheckedChange = {checked = it},
+                    enabled = choosenDropdown.isNotBlank() && pilihanKelas.isNotBlank()
+                )
+                Text(
+                    text = "Saya menyetujui setiap pernyataan yang ada tanpa ada paksaan dari pihak manapun.",
+                    fontWeight = FontWeight.Light, fontSize = 10.sp
+                )
+            }
         }
-    }
 
+    }
 }
