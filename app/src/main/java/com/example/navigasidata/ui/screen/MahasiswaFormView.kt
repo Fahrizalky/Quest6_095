@@ -190,7 +190,7 @@ fun MahasiswaFormView(
 
             Spacer(modifier = Modifier.padding(16.dp))
             Row(
-                modifier - Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 Button(onClick =  { onBackButtonClicked() }) {
