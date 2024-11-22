@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -95,7 +96,22 @@ fun RencanaStudyView(
                     topStart = 15.dp
                 )
             )
-    )
+            .fillMaxSize(),
 
+    ){
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            Text(text = "Pliha Mata Kuliah Peminatan", fontWeight = FontWeight.Bold)
+            Text(
+                text = "Silahkan pilih mata kuliah yang anda inginkan",
+                fontSize =  12.sp,
+                fontWeight = FontWeight.Light
+            )
+
+        }
+    }
 
 }
